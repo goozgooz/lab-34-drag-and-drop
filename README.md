@@ -1,28 +1,45 @@
-401 JS --  Lab 34 Budget Tracker
+401 JS --  Lab 32 Budget Tracker
 ===
+### David's Description
 
-Unlike the previous React assignments where you have been shepherding your work through the labs, for this assignment, you have been given a starting point from which to begin.
-
-Assume you have been hired at a company and have been handed this codebase, and need complete the project for delivery.  You must work from the existing code, adopting it's style, layout and architecture while still fulfilling the requirements.
-
-Further assume that what you have here is already in production as a "Phase 1 or 2" and you are implementing the final set of requirements. Be sure not to "break" any existing functionality.
 
 ## Submission Instructions
-  * Begin with a fork of this repository
+  * continue working from lab 31
   * submit a pull request to the project
 
 ## Requirements  
 #### Feature Tasks 
-* complete the lab 31, 32, and 33 tasks
-* This should demonstrate the totality of: Reducers, Combined Reducers, Middleware, Logging, Validation, Drag and Drop, Testing (Unit and Component)
+##### expense
+* in this app a expense should contain at least the following propertys
+  * `id` a uuid
+  * `categoryID` an id that corresponds to an existing category
+  * `timestamp` a date from when the category was created
+  * `name` a string that is the name of the category
+  * `price` a number that is the total amount of $ in the category 
+  * fell free to add more to your expense if you want
 
-##### SCSS
-Style the application using sass best practices  
- * Create a _reset.scss _vars.scss and _base.scss
- * style your components 
+##### redux
+###### app reducer
+* export a reducer that hols the entire app state from `reducer/index.js`
+* create a reducer that will combine you categories reducer and expenses reducer
+
+
+###### expenses reducer
+* create a category reducer in your your reducer directory
+* this reducer should atleast support the following interactions 
+  * `EXPENSE_CREATE` -- store an expense
+  * `EXPENSE_UPDATE` -- update an existing expense
+  * `EXPENSE_DELETE` -- delete an existing expense
+* if you need others feel free to add them
+
+###### action creators
+* you should create an action createor for each interaction supported by your expenses reducer
+
+###### store
+* in `lib/store.js` export a function  that will return a redux store from your app reducer
 
 ##### Components
-add and refactor  the following components and organzie them according to the following tree
+Create the following components and structure them according to the following diagram.  
 ``` 
 App
   Provider 
@@ -30,40 +47,32 @@ App
       Route / Dashboard
         CategoryForm -- for creating categorys
         [Category Item] -- list of Category items
-           Dropzone
-             CategoryForm  -- for updating categorys
-             ExpenseForm -- for creating expenses
-             [ExpenseItem]  -- list of expense items
-                Draggable 
-                  ExpenseForm -- for updating an expense
+           CategoryForm  -- for updating categorys
+           ExpenseForm -- for creating expenses
+           [ExpenseItem]  -- list of expense items
+              ExpenseForm -- for updating an expense
 ```
-###### Daggable
-* Create a component that enable users to drag its children
-* It store data passed into its `dataTransferItem` prop on the event handler for `onDragStart`
-  * data should be stored as json under the MIME 'application/json'
 
-###### Dropable 
-* Create a component that enables users to drop a Draggable component
-* onDrop it should invoke a callback with the data passed using the events dataTransferObject
-  * remember to parse the json 
+###### Update the CategoryItem Component
+* should keep all of the features described in lab-31
+* add an ExpenseForm to your category item that enables the user to create expenses on your app state
+* display list all the ExpenseItems belonging to the category
 
 
-###### ExpenseItem
-* Wrap the contents of the ExpenseItem in a Draggable 
-* Pass the expense data into the Draggables dataTransferItem prop
-* Implement field level validation for your expenses (title, amount required and properly typed)
+##### ExpenseForm Component 
+* should have an `onComplete` prop that will be invoked with the form state on submit
+* should support an `expense` prop that will both set the intial form state, and update the state in the hook on `componentWillReceiveProps()`
+* should have a `buttonText` prop that will configure the submit button's text
 
-###### CategoryItem
-* Wrap the contents of a category item in a dropzone 
-* When the onComplete of a Dropzone is fired update the expense so that it appears on the correct category
-* Implement field level validation for your categories (title, amount required and properly typed)
-
+##### ExpenseItem Component 
+* should have a button that will delete the expense from the appState `onClick`
+* should display the `name` and `price` of the component
+* should display an ExpenseForm that will enable the user to update the expense in the app state
 
 #### Test
-* Test every component except app
+* Test your ExpenseForm and CategoryForm
 * Test all of your action creators
 * Test each reducer used in your apps combineReducers
-  * test that the validation is working!
 
 ####  Documentation  
 Write a description of the project in your README.md
