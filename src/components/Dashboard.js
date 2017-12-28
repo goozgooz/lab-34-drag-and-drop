@@ -14,6 +14,8 @@ import CategoryUpdate from './Category/CategoryUpdate.js';
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
+
+        this.categoryDisplay = this.categoryDisplay.bind(this);
     }
 
     categoryDisplay = () => {
