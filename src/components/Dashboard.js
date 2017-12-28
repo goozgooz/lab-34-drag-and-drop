@@ -28,6 +28,10 @@ class Dashboard extends React.Component {
 
     }
 
+    componentDidUpdate = () => {
+        console.log(this.props.state);
+    }
+
     render() {
         return (
             <div>

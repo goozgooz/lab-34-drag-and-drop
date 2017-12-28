@@ -21,7 +21,7 @@ const expenseReducer = (state = initialState, action) => {
         case 'EXPENSE_UPDATE':
             oldState[expense.id].expense = expense.updatedContent;
             return oldState;
-
+        
         default:
             return state;
     }

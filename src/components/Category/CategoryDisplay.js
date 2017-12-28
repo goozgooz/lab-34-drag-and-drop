@@ -4,6 +4,7 @@ import ReactDom from 'react-dom';
 import ExpenseDisplay from '../Expense/ExpenseDisplay';
 import ExpenseCreate from '../Expense/ExpenseCreate';
 import ExpenseUpdate from'../Expense/ExpenseUpdate';
+import Draggable from '../draggable.js';
 
 class CategoryDisplay extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class CategoryDisplay extends React.Component {
 
             if (this.props.expenses[expense].categoryID === this.props.category.id) return (this.props.expenses[expense].updating) 
                 ?   <ExpenseUpdate expense={this.props.expenses[expense]} actions={this.props.expense_action} key={this.props.expenses[expense].id}/> : 
-                    <ExpenseDisplay expense={this.props.expenses[expense]} actions={this.props.expense_action} key={this.props.expenses[expense].id}/>;
+                    <Draggable key={this.props.expenses[expense].id} data={this.props.expenses[expense]}><ExpenseDisplay expense={this.props.expenses[expense]} actions={this.props.expense_action}/></Draggable>;
         });
     }
 
@@ -31,19 +32,19 @@ class CategoryDisplay extends React.Component {
     render() {
         return (
             <div className="category-display">
-            <p>Category Name: {this.props.category.name}</p>
-            <p>Category Budget: {this.props.category.budget}</p>
-
-            <button onClick={this.toggle}>Update Category</button>
-            <button onClick={this.deleteThis}>Delete Category</button>
-            <br />
-            <br />
-            Expenses:
-            <br />
-            {this.expenseDisplay()}
-            <br />
-            <ExpenseCreate categoryID={this.props.category.id} createExpense={this.props.expense_action.addExpense}/>
-        </div>
+                <p>Category Name: {this.props.category.name}</p>
+                <p>Category Budget: {this.props.category.budget}</p>
+    
+                <button onClick={this.toggle}>Update Category</button>
+                <button onClick={this.deleteThis}>Delete Category</button>
+                <br />
+                <br />
+                Expenses:
+                <br />
+                {this.expenseDisplay()}
+                <br />
+                <ExpenseCreate categoryID={this.props.category.id} createExpense={this.props.expense_action.addExpense}/>
+            </div>
         )
     }
 }
