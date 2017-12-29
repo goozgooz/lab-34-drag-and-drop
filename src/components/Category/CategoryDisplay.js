@@ -4,7 +4,7 @@ import ReactDom from 'react-dom';
 import ExpenseDisplay from '../Expense/ExpenseDisplay';
 import ExpenseCreate from '../Expense/ExpenseCreate';
 import ExpenseUpdate from'../Expense/ExpenseUpdate';
-import Draggable from '../draggable.js';
+import Draggable from '../Drag-Drop/draggable.js';
 
 class CategoryDisplay extends React.Component {
     constructor(props) {

@@ -10,6 +10,7 @@ import {expense_create, expense_update, expense_destroy, expense_toggle} from '.
 import CategoryCreate from './Category/CategoryCreate.js';
 import CategoryDisplay from './Category/CategoryDisplay.js';
 import CategoryUpdate from './Category/CategoryUpdate.js';
+import DropZone from './Drag-Drop/drop-zone.js';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -23,7 +24,9 @@ class Dashboard extends React.Component {
             let localCategory = this.props.state.categories[category_key];
             return (localCategory.updating) ?
                 <CategoryUpdate category={localCategory} action={this.props.category} key={category_key}/> :
-                <CategoryDisplay expenses={this.props.state.expenses} expense_action={this.props.expense} category_action={this.props.category} category={localCategory} key={category_key}/>
+                <DropZone key={category_key} onComplete={(data) => console.log('dropped card', data)}>
+                    <CategoryDisplay expenses={this.props.state.expenses} expense_action={this.props.expense} category_action={this.props.category} category={localCategory}/>
+                </DropZone>    
         });
 
     }
