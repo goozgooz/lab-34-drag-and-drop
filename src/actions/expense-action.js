@@ -1,9 +1,8 @@
-export const expense_create = expense => {
-    return {
-        type: 'EXPENSE_CREATE',
-        expense
-    }
-}
+export const expense_create = expense => ({
+    type: 'EXPENSE_CREATE',
+    expense
+
+})
 
 export const expense_update = (expense) => {
     return {
@@ -25,3 +24,8 @@ export const expense_toggle = expense => {
         expense
     }
 }
+
+export const expense_move = (expense, categoryID) => ({
+    type: 'EXPENSE_MOVE',
+    payload: {expense, categoryID},
+})

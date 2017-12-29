@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import {category_create, category_update, category_delete, category_toggle} from '../actions/category-action';
 
-import {expense_create, expense_update, expense_destroy, expense_toggle} from '../actions/expense-action';
+import {expense_create, expense_update, expense_destroy, expense_toggle, expense_move} from '../actions/expense-action';
 
 import CategoryCreate from './Category/CategoryCreate.js';
 import CategoryDisplay from './Category/CategoryDisplay.js';
@@ -23,9 +23,24 @@ class Dashboard extends React.Component {
         return Object.keys(this.props.state.categories).map(category_key => {
             let localCategory = this.props.state.categories[category_key];
             return (localCategory.updating) ?
-                <CategoryUpdate category={localCategory} action={this.props.category} key={category_key}/> :
-                <DropZone key={category_key} onComplete={(data) => console.log('dropped card', data)}>
-                    <CategoryDisplay expenses={this.props.state.expenses} expense_action={this.props.expense} category_action={this.props.category} category={localCategory}/>
+                <CategoryUpdate 
+                    category={localCategory} 
+                    action={this.props.category} 
+                    key={category_key}
+                />
+                :
+                <DropZone 
+                    key={category_key} 
+                    // onComplete={(expense, categoryID) => this.props.moveExpense(expense, categoryID)} 
+                    onComplete={this.props.expense.moveExpense}
+                    id={localCategory.id}
+                >
+                    <CategoryDisplay 
+                        expenses={this.props.state.expenses} 
+                        expense_action={this.props.expense} 
+                        category_action={this.props.category} 
+                        category={localCategory}
+                    />
                 </DropZone>    
         });
 
@@ -66,7 +81,8 @@ const mapDispatchToProps = (dispatch, getState) => ({
         addExpense: expense => dispatch(expense_create(expense)),
         updateExpense: expense => dispatch(expense_update(expense)),
         deleteExpense: expense => dispatch(expense_destroy(expense)),
-        toggleExpenseUpdate: expense => dispatch(expense_toggle(expense))
+        toggleExpenseUpdate: expense => dispatch(expense_toggle(expense)),
+        moveExpense: (expense, categoryID) => dispatch(expense_move(expense,categoryID))
     }
 });
 

@@ -15,10 +15,10 @@ class DropZone extends React.Component {
   handleDrop(e){
     try{
       let data = JSON.parse(e.dataTransfer.getData('application/json'));
-      this.props.onComplete(data);
+      this.props.onComplete(data, this.props.id);
     }
     catch(e){
-      console.log('bad data received', e.message);
+      console.log('bad data received', e);
     }
   }
   

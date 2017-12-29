@@ -1,7 +1,7 @@
 import initialState from '../lib/initialState';
 
 const expenseReducer = (state = initialState, action) => {
-    let {type, expense} = action;
+    let {type, expense, categoryID} = action;
     let oldState = {...state};
 
     switch(action.type) {
@@ -20,6 +20,10 @@ const expenseReducer = (state = initialState, action) => {
 
         case 'EXPENSE_UPDATE':
             oldState[expense.id].expense = expense.updatedContent;
+            return oldState;
+            
+        case 'EXPENSE_MOVE':
+            console.log('moving expense' + expense, 'id' + categoryID);
             return oldState;
         
         default:
