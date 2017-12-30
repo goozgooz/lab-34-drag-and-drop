@@ -11,6 +11,8 @@ import CategoryCreate from './Category/CategoryCreate.js';
 import CategoryDisplay from './Category/CategoryDisplay.js';
 import CategoryUpdate from './Category/CategoryUpdate.js';
 import DropZone from './Drag-Drop/drop-zone.js';
+import newCategory from '../lib/newCategory';
+
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -31,7 +33,6 @@ class Dashboard extends React.Component {
                 :
                 <DropZone 
                     key={category_key} 
-                    // onComplete={(expense, categoryID) => this.props.moveExpense(expense, categoryID)} 
                     onComplete={this.props.expense.moveExpense}
                     id={localCategory.id}
                 >
@@ -46,8 +47,13 @@ class Dashboard extends React.Component {
 
     }
 
-    componentDidUpdate = () => {
-        console.log(this.props.state);
+    // componentDidUpdate = () => {
+    //     console.log(this.props.state);
+    // }
+
+    componentDidMount(){
+      this.props.category.addCategory(newCategory('test',69));
+      this.props.category.addCategory(newCategory('more test',420));
     }
 
     render() {

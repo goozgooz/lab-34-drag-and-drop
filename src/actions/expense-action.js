@@ -27,5 +27,5 @@ export const expense_toggle = expense => {
 
 export const expense_move = (expense, categoryID) => ({
     type: 'EXPENSE_MOVE',
-    payload: {expense, categoryID},
+    payload: {expense, categoryID}
 })

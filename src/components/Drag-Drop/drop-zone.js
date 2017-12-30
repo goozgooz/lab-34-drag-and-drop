@@ -15,7 +15,6 @@ class DropZone extends React.Component {
   handleDrop(e){
     try{
       let data = JSON.parse(e.dataTransfer.getData('application/json'));
-      console.log(data, this.props.id);
       this.props.onComplete(data, this.props.id);
     }
     catch(e){

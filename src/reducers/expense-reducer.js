@@ -23,7 +23,10 @@ const expenseReducer = (state = initialState, action) => {
             return oldState;
             
         case 'EXPENSE_MOVE':
-            console.log('moving expense' + expense, 'id' + categoryID);
+            let expenseID = action.payload.expense.id;
+            let oldCategory = action.payload.expense.categoryID;
+            let newCategory = action.payload.categoryID;
+            oldState[expenseID].categoryID = newCategory;
             return oldState;
         
         default:
